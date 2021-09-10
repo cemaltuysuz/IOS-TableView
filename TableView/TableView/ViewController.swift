@@ -41,6 +41,33 @@ class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected Country : \(countries[indexPath.row])")
     }
+    
+    // This method is old.
+    /*
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        // Delete Action
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: {(action:UITableViewRowAction,indexPath:IndexPath) -> Void in
+            print("delete data : \(self.countries[indexPath.row])")
+        })
+        // Edit Action
+        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: {(action:UITableViewRowAction,indexPath:IndexPath) -> Void in
+            print("Edit data : \(self.countries[indexPath.row])")
+        })
+        return [deleteAction,editAction]
+    } */
+    
+    // This method is new
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){
+            (contextualAction,view,boolValue) in
+            print("delete data : \(self.countries[indexPath.row])")
+        }
+        let editAction = UIContextualAction(style: .normal, title: "Edit"){
+            (contextualAction,view,boolValue) in
+            print("edit data : \(self.countries[indexPath.row])")
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+    }
 
 }
 
